@@ -134,16 +134,10 @@ router.route("/registration").get((req, res) => {
                     "Authorization":'Bearer '+req.session.token
                 }
             }) .then(function (data) {
-
-               // console.log(data.data)
-                console.log(data.data)
-               console.log(data.data[0])
-    
+                console.log(data.data['code'])
                     if(data.data['code']=='200'){
                     req.flash('success', data.data['message'])
                     res.redirect('/')
-                        
-
                     }
                     if(data.data['code']=='400'){
                         req.flash('error', data.data['message'])
@@ -152,7 +146,6 @@ router.route("/registration").get((req, res) => {
     
             })
             .catch(function (err) {
-                
                 console.log(err)
                 req.flash('error', err)
                 res.redirect('/registration')
